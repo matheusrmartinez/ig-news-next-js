@@ -1,6 +1,6 @@
 .headerContainer {
   height: 5rem;
-  border-bottom: 1px solid var (--gray-800);
+  border-bottom: 1px solid var(--gray-800);
 }
 
 .headerContent {
@@ -25,13 +25,33 @@
 
       transition: color 0.2s;
 
+      & + a {
+        margin-left: 2rem;
+      }
+
       &:hover {
         color: var(--white)
       }
 
       &.active {
-        color: yellow;
+        color: var(--white);
+        font-weight: bold;
+      }
+
+      &.active::after {
+        content: '';
+        height: 3px;
+        border-radius: 3px 3px 0 0;
+        width: 100%;
+        position: absolute;
+        bottom: 1px;
+        left: 0;
+        background:  var(--yellow-500)
       }
     }
+  }
+
+  button {
+    margin-left: auto;
   }
 }
