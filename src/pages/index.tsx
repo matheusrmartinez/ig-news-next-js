@@ -9,10 +9,10 @@ interface HomeProps {
   product: {
     productId: string;
     amount: number;
-  }
+  };
 }
 
-export default function Home({product}: HomeProps) {
+export default function Home({ product }: HomeProps) {
   return (
     <>
       <Head>
@@ -36,10 +36,11 @@ export default function Home({product}: HomeProps) {
   );
 }
 
-
-export const getServerSideProps: GetServerSideProps = async() => {
-  const price = await stripe.prices.retrieve('price_1JGLdDACdrGP8engX78TfTZG', {
-  })
+export const getServerSideProps: GetServerSideProps = async () => {
+  const price = await stripe.prices.retrieve(
+    'price_1JJOmZFexlYaMLOw0z7RK2te',
+    {},
+  );
 
   const product = {
     priceId: price.id,
@@ -47,11 +48,11 @@ export const getServerSideProps: GetServerSideProps = async() => {
       style: 'currency',
       currency: 'USD',
     }).format(price.unit_amount / 100),
-  }
+  };
 
   return {
     props: {
-      product
-    }
-  }
-}
+      product,
+    },
+  };
+};
