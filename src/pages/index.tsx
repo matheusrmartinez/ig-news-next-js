@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { SubscribeButton } from '../components/SubscribeButton';
 import { stripe } from '../services/stripe';
@@ -8,7 +8,7 @@ import styles from './home.module.scss';
 interface HomeProps {
   product: {
     productId: string;
-    amount: number;
+    amount: string;
   };
 }
 
@@ -28,7 +28,7 @@ export default function Home({ product }: HomeProps) {
             Get access to all the publications <br />
             <span>for {product.amount} month</span>
           </p>
-          <SubscribeButton priceId={product.productId} />
+          <SubscribeButton/>
         </section>
         <img src="/images/avatar.svg" alt="Girl coding"></img>
       </main>
@@ -36,7 +36,7 @@ export default function Home({ product }: HomeProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const price = await stripe.prices.retrieve(
     'price_1JJOmZFexlYaMLOw0z7RK2te',
     {},
